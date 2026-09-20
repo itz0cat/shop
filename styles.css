@@ -760,3 +760,158 @@ footer .row a {
 footer .row a:hover {
   color: var(--blue);
 }
+
+@media (max-width: 640px) {
+  .wrap {
+    padding: 0 max(1rem, env(safe-area-inset-right)) max(2.5rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+  }
+
+  .strip {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 0.65rem 0;
+  }
+
+  .strip > div:last-child {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .hero {
+    padding: 1.75rem 0 1.5rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 14vw, 4rem);
+    line-height: 0.92;
+  }
+
+  .hero p {
+    font-size: 12.5px;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    min-height: 46px;
+    padding: 12px;
+  }
+
+  .features {
+    margin-bottom: 1.5rem;
+  }
+
+  .feature {
+    padding: 1rem 0.9rem;
+    gap: 10px;
+  }
+
+  .record {
+    padding: 1.15rem 1rem;
+  }
+
+  dl.price-block dt {
+    font-size: 1.9rem;
+  }
+
+  button.buy {
+    min-height: 48px;
+    font-size: 11.5px;
+  }
+
+  .demo-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    font-size: 10px;
+  }
+
+  .demo-presets {
+    gap: 5px;
+    padding: 0.6rem 0.75rem;
+  }
+
+  .preset-btn {
+    min-height: 32px;
+    font-size: 10px;
+    padding: 6px 10px;
+  }
+
+  .demo-controls {
+    flex-direction: column;
+    gap: 8px;
+    padding: 0.75rem;
+  }
+
+  .demo-input {
+    font-size: 16px; /* Prevents auto-zoom on mobile iOS/Android */
+    padding: 10px 12px;
+    min-height: 44px;
+  }
+
+  #sim-solve-btn {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  .modal-box {
+    padding: 1.25rem 1rem;
+    width: 95%;
+    max-height: 88vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .modal-title {
+    font-size: 1.2rem;
+  }
+
+  .modal-actions .btn {
+    min-height: 48px;
+  }
+
+  footer .row {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 6px 0;
+  }
+
+  footer .row span:last-child {
+    word-break: break-all;
+  }
+}
+
+@media (max-width: 420px) {
+  .main-nav {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .nav-links {
+    width: 100%;
+    gap: 6px;
+  }
+
+  .nav-link {
+    flex: 1;
+    justify-content: center;
+    padding: 8px 6px;
+    font-size: 10.5px;
+    min-height: 40px;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
