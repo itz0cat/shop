@@ -3,23 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>ITZ0CAT // UNIVERSAL STORE & FLAGSHIP MODS</title>
+  <title>ITZ0CAT // DEV PROFILE & CATGAME STORE</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css">
-  <!-- Navigo Client-Side Router -->
-  <script src="https://cdn.jsdelivr.net/npm/navigo@8.11.1/lib/navigo.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/navigo@8.11.1/lib/navigo.min.js" defer></script>
 </head>
 <body class="crt-enabled">
 
 <div class="container">
 
-  <!-- TOP SYSTEM STATUS STRIP -->
   <header class="top-strip">
     <div class="system-status">
       <span class="pulse-dot"></span>
-      <span>CAT-NETWORK // SYSTEM OPERATIONAL // REV 3.0</span>
+      <span>CAT-NETWORK // SYSTEM OPERATIONAL // REV 4.0</span>
     </div>
     <div class="top-actions">
       <button id="crt-toggle" class="crt-toggle-btn" title="Toggle CRT scanline filter">CRT: ON</button>
@@ -27,136 +25,84 @@
     </div>
   </header>
 
-  <!-- NAVIGO MAIN NAVIGATION BAR -->
   <nav class="main-nav">
     <a href="/" class="nav-brand" data-navigo>
-      Cat Foundry
-      <span class="brand-badge">SPA // NAVIGO</span>
+      Itz0Cat
+      <span class="brand-badge">DEV PROFILE</span>
     </a>
     <ul class="nav-links">
-      <li>
-        <a href="/" class="nav-link" data-navigo data-route="home">
-          <span class="nav-idx">01</span> Home
-        </a>
-      </li>
-      <li>
-        <a href="/catgame" class="nav-link" data-navigo data-route="catgame">
-          <span class="nav-idx">02</span> CatGame Mod
-        </a>
-      </li>
-      <li>
-        <a href="/skills" class="nav-link" data-navigo data-route="skills">
-          <span class="nav-idx">03</span> Dev Skills
-        </a>
-      </li>
-      <li>
-        <a href="/prototypes" class="nav-link" data-navigo data-route="prototypes">
-          <span class="nav-idx">04</span> Prototypes
-        </a>
-      </li>
-      <li>
-        <a href="/tickets" class="nav-link" data-navigo data-route="tickets">
-          <span class="nav-idx">05</span> Tickets & Buy
-        </a>
-      </li>
+      <li><a href="/" class="nav-link" data-navigo data-route="home"><span class="nav-idx">01</span> Profile</a></li>
+      <li><a href="/store" class="nav-link" data-navigo data-route="store"><span class="nav-idx">02</span> CatGame Store</a></li>
+      <li><a href="/projects" class="nav-link" data-navigo data-route="projects"><span class="nav-idx">03</span> Projects</a></li>
+      <li><a href="/skills" class="nav-link" data-navigo data-route="skills"><span class="nav-idx">04</span> Dev Skills</a></li>
+      <li><a href="/tickets" class="nav-link" data-navigo data-route="tickets"><span class="nav-idx">05</span> Tickets</a></li>
     </ul>
   </nav>
 
-  <!-- DYNAMIC VIEW RENDERED BY NAVIGO ROUTER -->
-  <main id="app-view">
-    <!-- View content dynamically rendered by app.js -->
-  </main>
+  <main id="app-view"></main>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-grid">
       <div class="footer-col">
-        <h4>Cat Foundry</h4>
+        <h4>CatGame Store</h4>
         <ul>
-          <li><a href="/catgame" data-navigo>CatGame Auto-Solver</a></li>
-          <li><a href="/prototypes" data-navigo>CatClient 1.21.11</a></li>
-          <li><a href="/prototypes" data-navigo>PocketVPS Prototype</a></li>
-          <li><a href="/prototypes" data-navigo>CatBot Ticket System</a></li>
+          <li><a href="/store" data-navigo>Iron / Gold / Diamond Keys</a></li>
+          <li><a href="/store" data-navigo>Solver Terminal Demo</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Developer Skills</h4>
+        <h4>Projects</h4>
         <ul>
-          <li><a href="/skills" data-navigo>Minecraft Modding Skill</a></li>
-          <li><a href="/skills" data-navigo>Neobrutalism Design Skill</a></li>
-          <li><a href="/skills" data-navigo>Typography Mastery Skill</a></li>
+          <li><a href="/projects" data-navigo>CatTags (Fabric mod)</a></li>
+          <li><a href="/projects" data-navigo>Cat Client</a></li>
+          <li><a href="/projects" data-navigo>PocketVPS</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Support & Orders</h4>
+        <h4>Elsewhere</h4>
         <ul>
-          <li><a href="https://discord.gg/WTR52mYMF" target="_blank">Discord Server (Invite)</a></li>
-          <li><a href="https://discord.com/channels/1263147204940533781/1538574462553690112" target="_blank">Direct Ticket Channel</a></li>
-          <li><a href="/tickets" data-navigo>Ticket Dispatch Guide</a></li>
-          <li><a href="https://github.com/itz0cat" target="_blank">Developer GitHub (@Itz0Cat)</a></li>
+          <li><a href="https://github.com/itz0cat" target="_blank" rel="noopener">GitHub (@Itz0Cat)</a></li>
+          <li><a href="https://discord.gg/WTR52mYMF" target="_blank" rel="noopener">Discord Server</a></li>
+          <li><a href="/tickets" data-navigo>Order / Support Tickets</a></li>
         </ul>
       </div>
     </div>
-
     <div class="footer-bottom">
-      <div>© 2026 CatGame Foundry & @Itz0Cat. All rights reserved.</div>
-      <div>STATIC VERCEL BUILD // NAVIGO SPA ROUTER // DISCORD TICKET DISPATCH</div>
+      <div>© 2026 Itz0Cat.</div>
+      <div>STATIC VERCEL BUILD // NAVIGO SPA ROUTER</div>
     </div>
   </footer>
 
 </div>
 
-<!-- CHECKOUT / DISCORD TICKET REDIRECT MODAL -->
+<!-- CHECKOUT / DISCORD TICKET REDIRECT MODAL (CatGame key purchases only) -->
 <div id="checkout-modal" class="modal-overlay">
   <div class="modal-box">
     <button id="modal-close" class="modal-close" title="Close">✕</button>
-    
     <div class="modal-header">
       <div class="modal-tag">// ORDER DISPATCH</div>
       <h3 id="modal-item-title" class="modal-title">Product Name</h3>
     </div>
-
     <div class="modal-body">
       <p id="modal-item-desc">Product description will appear here.</p>
-
       <div class="order-summary-box">
-        <div class="order-row">
-          <span>SKU Code:</span>
-          <span id="modal-item-sku">SKU-CATGAME</span>
-        </div>
-        <div class="order-row">
-          <span>Fulfillment:</span>
-          <span>Discord Ticket System</span>
-        </div>
-        <div class="order-row">
-          <span>Price:</span>
-          <span id="modal-item-price" style="color:var(--green);">₹80</span>
-        </div>
+        <div class="order-row"><span>SKU Code:</span><span id="modal-item-sku">SKU-CATGAME</span></div>
+        <div class="order-row"><span>Fulfillment:</span><span>Discord Ticket System</span></div>
+        <div class="order-row"><span>Price:</span><span id="modal-item-price" style="color:var(--green);">₹80</span></div>
       </div>
-
       <p style="font-size:12px; color:var(--dim); line-height:1.5;">
-        To guarantee instant HWID binding and zero-fraud delivery, all orders are processed via our official Discord ticket channel. Click below to jump straight to our server's <b>#tickets</b> channel or join the server.
+        All key orders are processed via the official Discord ticket channel for instant HWID binding. Click below to jump to <b>#tickets</b>.
       </p>
     </div>
-
     <div class="modal-actions">
-      <button id="modal-ticket-btn" class="btn btn-discord">
-        Open Ticket Channel (#tickets) ↗
-      </button>
-      <button class="btn btn-sm" onclick="window.open('https://discord.gg/WTR52mYMF', '_blank')">
-        Join Discord Server (Invite) ↗
-      </button>
-      <button id="modal-copy-btn" class="btn">
-        Copy Order Details
-      </button>
+      <button id="modal-ticket-btn" class="btn btn-discord">Open Ticket Channel (#tickets) ↗</button>
+      <button id="modal-invite-btn" class="btn btn-sm">Join Discord Server (Invite) ↗</button>
+      <button id="modal-copy-btn" class="btn">Copy Order Details</button>
     </div>
-
-    <div class="modal-note">
-      Direct Developer Contact: <b>@Itz0Cat</b> on Discord
-    </div>
+    <div class="modal-note">Direct Developer Contact: <b>@Itz0Cat</b> on Discord</div>
   </div>
 </div>
 
-<script src="/app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
