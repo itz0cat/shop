@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CAT GAME // TERMINAL (MULTI)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --fg: #eaeaea;
+    --dim: #7a7a7a;
+    --red: #ff2a2a;
+    --green: #4af626;
+    --line: #2a2a2a;
+    --iron: #a3adc2;
+    --gold: #fbbf24;
+    --diamond: #3b82f6;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'IBM Plex Mono', monospace;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* CRT scanlines + noise, DOM-root wide */
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 50;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.025) 2px, rgba(255,255,255,0.025) 4px);
+  }
+  body::after {
+    content: "";
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 49;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 1rem 3rem; position: relative; z-index: 1; }
+
+  /* HEADER STRIP */
+  .strip {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    border-bottom: 1px solid var(--line);
+    padding: 0.85rem 0;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+  .strip .led { display: flex; align-items: center; gap: 6px; }
+  .strip .led .dot { width: 6px; height: 6px; background: var(--green); box-shadow: 0 0 6px var(--green); }
+
+  /* HERO */
+  .hero { padding: 2.5rem 0 2rem; border-bottom: 1px solid var(--line); }
+  .hero .tag {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--red);
+    margin: 0 0 1rem;
+  }
+  .hero h1 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(3rem, 17vw, 5.5rem);
+    line-height: 0.85;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    margin: 0 0 1.25rem;
+  }
+  .hero p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--dim);
+    max-width: 42ch;
+    margin: 0 0 1.5rem;
+  }
+  .hero .btn {
+    display: inline-block;
+    background: transparent;
+    border: 1px solid var(--fg);
+    color: var(--fg);
+    font-family: inherit;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    cursor: pointer;
+  }
+  .hero .btn:active { background: var(--fg); color: var(--bg); }
+
+  /* SECTION LABEL */
+  .section-head {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 10px;
+    margin: 2.5rem 0 1rem;
+  }
+  .section-head .bracket { color: var(--red); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+  .section-head .rule { height: 1px; background: var(--line); }
+  .section-head .idx { color: var(--dim); font-size: 11px; }
+
+  /* FEATURES: bimodal density grid */
+  .features {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin-bottom: 1rem;
+  }
+  .feature { background: var(--bg); padding: 1rem 1.1rem; display: grid; grid-template-columns: auto 1fr; gap: 12px; }
+  .feature .id { font-size: 11px; color: var(--red); letter-spacing: 0.05em; padding-top: 2px; }
+  .feature h4 { margin: 0 0 4px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.03em; font-weight: 600; }
+  .feature p { margin: 0; font-size: 12px; line-height: 1.6; color: var(--dim); }
+
+  /* PRICING — telemetry records */
+  .records { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .record { background: var(--bg); padding: 1.25rem 1.1rem; }
+  .record.featured { background: #0f0a0a; }
+  .record.iron { background: #111113; }
+  .record.gold { background: #151009; }
+  .record.diamond.featured { background: #0a0f1a; }
+
+  .requires {
+    font-size: 9.5px;
+    color: var(--dim);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-top: 3px;
+  }
+
+  .rec-top { display: grid; grid-template-columns: 1fr auto; align-items: start; margin-bottom: 1rem; }
+  .rec-top .name { font-family: 'Archivo Black', sans-serif; font-size: 1.3rem; text-transform: uppercase; letter-spacing: -0.01em; }
+  .rec-top .unit-id { font-size: 10px; color: var(--dim); letter-spacing: 0.05em; }
+  .rec-top .flag {
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border: 1px solid var(--line);
+    padding: 3px 8px;
+    color: var(--dim);
+  }
+  .record.featured .flag { border-color: var(--red); color: var(--red); }
+
+  .record.iron .name, .record.iron dt, .record.iron .flag { color: var(--iron); }
+  .record.iron .flag { border-color: var(--iron); }
+  .record.iron ul.perks li::before { color: var(--iron); }
+  .record.iron button.buy { border-color: var(--iron); color: var(--iron); }
+  .record.iron button.buy:active { background: var(--iron); color: var(--bg); }
+
+  .record.gold .name, .record.gold dt, .record.gold .flag { color: var(--gold); }
+  .record.gold .flag { border-color: var(--gold); }
+  .record.gold ul.perks li::before { color: var(--gold); }
+  .record.gold button.buy { border-color: var(--gold); color: var(--gold); }
+  .record.gold button.buy:active { background: var(--gold); color: var(--bg); }
+
+  .record.diamond .name, .record.diamond dt, .record.diamond .flag { color: var(--diamond); }
+  .record.diamond .flag { border-color: var(--diamond); }
+  .record.diamond ul.perks li::before { color: var(--diamond); }
+  .record.diamond button.buy { border-color: var(--diamond); color: var(--diamond); }
+  .record.diamond button.buy:active { background: var(--diamond); color: var(--bg); }
+
+  dl.price-block { display: flex; align-items: baseline; gap: 8px; margin: 0 0 1rem; }
+  dl.price-block dt { font-size: 2rem; font-family: 'Archivo Black', sans-serif; }
+  dl.price-block dd { margin: 0; font-size: 11px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  ul.perks { list-style: none; margin: 0 0 1.1rem; padding: 0; border-top: 1px solid var(--line); }
+  ul.perks li {
+    font-size: 11.5px;
+    color: var(--dim);
+    padding: 7px 0;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    gap: 8px;
+  }
+  ul.perks li::before { content: ">>>"; color: var(--red); font-size: 10px; }
+
+  button.buy {
+    width: 100%;
+    background: transparent;
+    border: 1px solid var(--fg);
+    color: var(--fg);
+    font-family: inherit;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 12px;
+    cursor: pointer;
+  }
+  .record.featured button.buy { border-color: var(--red); color: var(--red); }
+  button.buy:active { background: var(--fg); color: var(--bg); }
+  .record.featured button.buy:active { background: var(--red); color: var(--bg); }
+
+  /* FOOTER READOUT */
+  footer { border-top: 1px solid var(--line); margin-top: 2.5rem; padding-top: 1.25rem; }
+  footer .row { display: grid; grid-template-columns: 1fr auto; font-size: 10px; color: var(--dim); letter-spacing: 0.04em; padding: 3px 0; }
+  footer .row span:last-child { color: var(--fg); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="strip">
+    <div>CAT-GAME / TERMINAL / REV 2.6</div>
+    <div class="led"><span class="dot"></span>LIVE</div>
+  </div>
+
+  <div class="hero">
+    <p class="tag">[ FLAGSHIP MOD ]</p>
+    <h1>Cat<br>game</h1>
+    <p>The flagship Cat Game mod. Pick a key, unlock the good stuff, jump straight in.</p>
+    <button class="btn">&gt;&gt;&gt; See the keys</button>
+  </div>
+
+  <div class="section-head">
+    <span class="bracket">[ Why play ]</span>
+    <span class="rule"></span>
+    <span class="idx">01</span>
+  </div>
+  <div class="features">
+    <div class="feature">
+      <span class="id">01</span>
+      <div><h4>Built for the mod</h4><p>The flagship experience, tuned specifically for Cat Game — not a generic add-on.</p></div>
+    </div>
+    <div class="feature">
+      <span class="id">02</span>
+      <div><h4>Three key tiers</h4><p>Iron, gold, and diamond each unlock more perks, so you pick what fits.</p></div>
+    </div>
+    <div class="feature">
+      <span class="id">03</span>
+      <div><h4>No lock-in</h4><p>Weekly keys cancel anytime. Iron key is a one-time buy that's yours for good.</p></div>
+    </div>
+  </div>
+
+  <div class="section-head">
+    <span class="bracket">[ Access keys ]</span>
+    <span class="rule"></span>
+    <span class="idx">02</span>
+  </div>
+  <div class="records">
+
+    <div class="record iron">
+      <div class="rec-top">
+        <div>
+          <div class="name">Iron</div>
+          <div class="unit-id">UNIT / KEY-01</div>
+        </div>
+        <span class="flag">One-time</span>
+      </div>
+      <dl class="price-block">
+        <dt>₹60</dt>
+        <dd>/ permanent</dd>
+      </dl>
+      <ul class="perks">
+        <li>Lifetime access, no renewal</li>
+        <li>Core Cat Game features unlocked</li>
+        <li>One-time purchase, keep it forever</li>
+      </ul>
+      <button class="buy">Get iron key</button>
+    </div>
+
+    <div class="record gold">
+      <div class="rec-top">
+        <div>
+          <div class="name">Gold</div>
+          <div class="unit-id">UNIT / KEY-02</div>
+          <div class="requires">Requires iron key</div>
+        </div>
+        <span class="flag">Weekly</span>
+      </div>
+      <dl class="price-block">
+        <dt>₹20</dt>
+        <dd>/ week</dd>
+      </dl>
+      <ul class="perks">
+        <li>Requires an active iron key</li>
+        <li>Everything in Iron</li>
+        <li>Gold-tier perks and cosmetics</li>
+        <li>Cancel anytime, no lock-in</li>
+      </ul>
+      <button class="buy">Get gold key</button>
+    </div>
+
+    <div class="record featured diamond">
+      <div class="rec-top">
+        <div>
+          <div class="name">Diamond</div>
+          <div class="unit-id">UNIT / KEY-03</div>
+          <div class="requires">Requires iron key</div>
+        </div>
+        <span class="flag">Best value</span>
+      </div>
+      <dl class="price-block">
+        <dt>₹50</dt>
+        <dd>/ week</dd>
+      </dl>
+      <ul class="perks">
+        <li>Requires an active iron key</li>
+        <li>Everything in Gold</li>
+        <li>Diamond-exclusive perks</li>
+        <li>Priority access to new drops</li>
+      </ul>
+      <button class="buy">Get diamond key</button>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="row"><span>Currency</span><span>INR</span></div>
+    <div class="row"><span>Weekly keys</span><span>Auto-renew / cancel anytime</span></div>
+    <div class="row"><span>Permanent keys</span><span>Never expire</span></div>
+    <div class="row"><span>Prerequisite</span><span>Gold and diamond require an active iron key</span></div>
+    <div class="row"><span>Source</span><span>Cat Game — flagship mod ®</span></div>
+  </footer>
+
+</div>
+
+</body>
+</html>
+
