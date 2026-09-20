@@ -1,5 +1,6 @@
 /**
- * ITZ0CAT DEV PROFILE & CATGAME SHOP // NAVIGO SPA ROUTER
+ * ITZ0CAT // DEV PROFILE & CATGAME SHOP // NAVIGO SPA
+ * Built using the prototype.html reference aesthetic and neobrutalism design tokens
  */
 
 const DISCORD_TICKET_URL = "https://discord.com/channels/1263147204940533781/1538574462553690112";
@@ -7,66 +8,56 @@ const DISCORD_INVITE_URL = "https://discord.gg/WTR52mYMF";
 const DISCORD_USERNAME = "@Itz0Cat";
 const GITHUB_URL = "https://github.com/itz0cat";
 
-const PROFILE = {
-  name: "Itz0Cat",
-  tagline: "Minecraft Fabric modder & solo indie dev.",
-  bio: "Building Fabric mods, clients, and dev tooling. Creator of CatGame Flagship Auto-Solver, CatTags, and Cat Client for Java Edition 1.21.11.",
-  stack: ["Java / Fabric API", "Node.js", "PostgreSQL", "Render", "GitHub Actions"]
-};
-
-// CATGAME STORE — flagship product, sold via Discord ticket
-const CATGAME = {
-  id: "catgame-mod",
-  title: "CatGame Flagship Auto-Solver",
-  badge: "Flagship Auto-Solver",
-  description: "Undetected Minecraft Fabric 1.21.11 chat-game auto-solver. Solves fill-in-the-gaps, unscramble, math, reverse, and trivia with humanized delays and predictive radar.",
-  tags: ["Fabric 1.21.11", "0.8s Fastest", "2,466+ Words"],
-  sku: "SKU-CATGAME-SOLVER",
-  tiers: [
-    {
-      name: "Iron Tier",
-      price: "₹80",
-      cadence: "Lifetime Permanent",
-      delay: "4.0s (Fixed)",
-      devices: "1 Device",
-      sku: "CATGAME-IRON-LIFETIME",
-      specs: [
-        "Fixed 4.0s humanized delay",
-        "1 Device allocation (HWID locked)",
-        "Permanent lifetime access",
-        "All 6 core game solvers included"
-      ]
-    },
-    {
-      name: "Gold Tier",
-      price: "₹20/wk (or ₹70/mo)",
-      cadence: "Subscription",
-      delay: "2.5s (Down to 2.0s)",
-      devices: "2 Devices",
-      sku: "CATGAME-GOLD-SUB",
-      specs: [
-        "Adjustable delay: 2.5s down to 2.0s",
-        "In-game /cat delay unlocked",
-        "2 Devices allocation (PC + Mobile)",
-        "Priority solver backend queue"
-      ]
-    },
-    {
-      name: "Diamond Tier",
-      price: "₹40/wk (or ₹140/mo)",
-      cadence: "Subscription",
-      delay: "0.8s (Down to 0.1s)",
-      devices: "5 Devices",
-      sku: "CATGAME-DIAMOND-VIP",
-      specs: [
-        "Near-instant 0.8s delay (down to 0.1s)",
-        "Unrestricted in-game delay control",
-        "5 Devices allocation (Clan / Multi-box)",
-        "24/7 custom server trivia additions"
-      ]
-    }
-  ]
-};
+const TIERS = [
+  {
+    name: "Iron",
+    unit: "UNIT / KEY-01",
+    price: "₹80",
+    cadence: "/ permanent",
+    flag: "One-time",
+    requires: null,
+    sku: "CATGAME-IRON-LIFETIME",
+    cls: "iron",
+    specs: [
+      "Lifetime access, no renewal",
+      "Fixed 4.0s humanized delay",
+      "1 Device allocation (HWID locked)",
+      "All 6 core game solvers included"
+    ]
+  },
+  {
+    name: "Gold",
+    unit: "UNIT / KEY-02",
+    price: "₹20",
+    cadence: "/ week (or ₹70/mo)",
+    flag: "Weekly",
+    requires: "Requires iron key",
+    sku: "CATGAME-GOLD-SUB",
+    cls: "gold",
+    specs: [
+      "Requires an active iron key",
+      "Adjustable delay: 2.5s down to 2.0s",
+      "2 Devices allocation (PC + Mobile)",
+      "Priority solver backend queue"
+    ]
+  },
+  {
+    name: "Diamond",
+    unit: "UNIT / KEY-03",
+    price: "₹40",
+    cadence: "/ week (or ₹140/mo)",
+    flag: "Best value",
+    requires: "Requires iron key",
+    sku: "CATGAME-DIAMOND-VIP",
+    cls: "featured diamond",
+    specs: [
+      "Requires an active iron key",
+      "Near-instant 0.8s delay (down to 0.1s)",
+      "5 Devices allocation (Clan / Multi-box)",
+      "24/7 custom server trivia additions"
+    ]
+  }
+];
 
 const router = new Navigo("/", { hash: false });
 let selectedTier = null;
@@ -111,42 +102,51 @@ function renderHomePage() {
   if (!appView) return;
 
   appView.innerHTML = `
-    <section class="hero">
-      <div>
-        <div class="hero-tag">Developer Profile</div>
-        <h1 class="hero-title">${escapeHtml(PROFILE.name)}</h1>
-        <p class="hero-desc"><b>${escapeHtml(PROFILE.tagline)}</b><br>${escapeHtml(PROFILE.bio)}</p>
-
-        <div class="product-tags" style="margin-bottom:2rem;">
-          ${PROFILE.stack.map(s => `<span class="product-tag">${escapeHtml(s)}</span>`).join("")}
-        </div>
-
-        <div class="hero-cta-group">
-          <a href="/shop" class="btn btn-primary" data-navigo>Go to Shop →</a>
-          <a href="${GITHUB_URL}" class="btn" target="_blank" rel="noopener">GitHub ↗</a>
-          <a href="${DISCORD_INVITE_URL}" class="btn btn-discord" target="_blank" rel="noopener">Discord Server ↗</a>
-        </div>
+    <div class="hero">
+      <p class="tag">[ DEV PROFILE // SOLO INDIE DEV ]</p>
+      <h1>Itz<br>0cat</h1>
+      <p>Minecraft Fabric modder & developer. Creator of CatGame Flagship Auto-Solver, CatTags, and Cat Client for Java Edition 1.21.11.</p>
+      <div class="hero-actions">
+        <a href="/shop" class="btn btn-primary" data-navigo>&gt;&gt;&gt; See the keys</a>
+        <a href="${GITHUB_URL}" class="btn" target="_blank" rel="noopener">GitHub ↗</a>
+        <a href="${DISCORD_INVITE_URL}" class="btn btn-discord" target="_blank" rel="noopener">Discord Server ↗</a>
       </div>
-    </section>
-
-    <div class="section-header">
-      <span class="section-tag">[ Flagship Product ]</span>
-      <span class="section-line"></span>
-      <span class="section-index">SHOP</span>
     </div>
 
-    <div class="flagship-showcase">
-      <div class="flagship-header">
+    <div class="section-head">
+      <span class="bracket">[ Flagship Mod ]</span>
+      <span class="rule"></span>
+      <span class="idx">01</span>
+    </div>
+
+    <div class="features">
+      <div class="feature">
+        <span class="id">01</span>
         <div>
-          <div class="flagship-badge">${escapeHtml(CATGAME.badge)}</div>
-          <h2 class="flagship-title">${escapeHtml(CATGAME.title)}</h2>
+          <h4>Built for Fabric 1.21.11</h4>
+          <p>The flagship experience, tuned specifically for Minecraft 1.21.11 chat games — not a generic add-on.</p>
         </div>
       </div>
-      <p class="flagship-desc">${escapeHtml(CATGAME.description)}</p>
-      <div class="product-tags" style="margin-bottom:1.25rem;">
-        ${CATGAME.tags.map(t => `<span class="product-tag">${escapeHtml(t)}</span>`).join("")}
+      <div class="feature">
+        <span class="id">02</span>
+        <div>
+          <h4>Three Key Tiers</h4>
+          <p>Iron, Gold, and Diamond each unlock faster solve delays and multi-device slots. Pick what fits.</p>
+        </div>
       </div>
-      <a href="/shop" class="btn btn-primary btn-sm" data-navigo>View Key Tiers & Demo (From ₹20) →</a>
+      <div class="feature">
+        <span class="id">03</span>
+        <div>
+          <h4>No Lock-in</h4>
+          <p>Weekly keys cancel anytime. Iron key is a one-time permanent buy that is yours for good.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin: 1.5rem 0 2rem;">
+      <a href="/shop" class="btn btn-primary" data-navigo style="width:100%; text-align:center;">
+        &gt;&gt;&gt; Open Shop & Live Solver Simulator
+      </a>
     </div>
   `;
 
@@ -154,21 +154,28 @@ function renderHomePage() {
 }
 
 // -------------------------------------------------------------
-// PAGE: SHOP (CatGame Tiers & Terminal Simulator)
+// PAGE: SHOP (CatGame Keys & Terminal Simulator)
 // -------------------------------------------------------------
 function renderShopPage() {
   const appView = document.getElementById("app-view");
   if (!appView) return;
 
   appView.innerHTML = `
-    <div class="breadcrumb">
-      <a href="/" data-navigo>Home</a><span class="sep">/</span><span class="current">Shop</span>
+    <div class="hero">
+      <p class="tag">[ FLAGSHIP MOD // FABRIC 1.21.11 ]</p>
+      <h1>Cat<br>game</h1>
+      <p>The flagship Cat Game mod. Pick a key, unlock the good stuff, jump straight in.</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" onclick="document.getElementById('access-keys-section').scrollIntoView({behavior:'smooth'})">
+          &gt;&gt;&gt; See the keys
+        </button>
+      </div>
     </div>
 
-    <div class="page-intro">
-      <div class="hero-tag">Fabric 1.21.11 // Flagship Store</div>
-      <h1 class="page-title">CatGame Auto-Solver</h1>
-      <p class="page-desc">${escapeHtml(CATGAME.description)}</p>
+    <div class="section-head">
+      <span class="bracket">[ Live Simulator ]</span>
+      <span class="rule"></span>
+      <span class="idx">01</span>
     </div>
 
     <div class="solver-demo">
@@ -192,42 +199,38 @@ function renderShopPage() {
       </div>
     </div>
 
-    <div class="section-header">
-      <span class="section-tag">[ License Keys ]</span>
-      <span class="section-line"></span>
-      <span class="section-index">INSTANT HWID DISPATCH</span>
+    <div id="access-keys-section" class="section-head">
+      <span class="bracket">[ Access keys ]</span>
+      <span class="rule"></span>
+      <span class="idx">02</span>
     </div>
 
-    <div id="catgame-tiers" class="tier-grid">
-      ${CATGAME.tiers.map((t, i) => tierCardHtml(t, i)).join("")}
+    <div class="records">
+      ${TIERS.map((tier, index) => `
+        <div class="record ${tier.cls}">
+          <div class="rec-top">
+            <div>
+              <div class="name">${escapeHtml(tier.name)}</div>
+              <div class="unit-id">${escapeHtml(tier.unit)}</div>
+              ${tier.requires ? `<div class="requires">${escapeHtml(tier.requires)}</div>` : ""}
+            </div>
+            <span class="flag">${escapeHtml(tier.flag)}</span>
+          </div>
+          <dl class="price-block">
+            <dt>${escapeHtml(tier.price)}</dt>
+            <dd>${escapeHtml(tier.cadence)}</dd>
+          </dl>
+          <ul class="perks">
+            ${tier.specs.map(s => `<li>${escapeHtml(s)}</li>`).join("")}
+          </ul>
+          <button class="buy" onclick="buyTier(${index})">Get ${escapeHtml(tier.name.toLowerCase())} key</button>
+        </div>
+      `).join("")}
     </div>
   `;
 
   router.updatePageLinks();
   setupSimulator();
-}
-
-function tierCardHtml(tier, index) {
-  const cls = tier.name.split(" ")[0].toLowerCase();
-  const featured = cls === "diamond" ? " featured" : "";
-  return `
-    <div class="tier-card ${cls}${featured}">
-      <div>
-        <div class="tier-top">
-          <div class="tier-name">${escapeHtml(tier.name)}</div>
-          <span class="tier-tag">${escapeHtml(tier.cadence)}</span>
-        </div>
-        <div class="tier-price-wrap">
-          <span class="tier-price">${escapeHtml(tier.price.split(" ")[0])}</span>
-          <span class="tier-cadence">${escapeHtml(tier.price.replace(tier.price.split(" ")[0], "").trim())}</span>
-        </div>
-        <ul class="tier-specs">
-          ${tier.specs.map(s => `<li>${escapeHtml(s)}</li>`).join("")}
-        </ul>
-      </div>
-      <button class="btn btn-sm${cls === "diamond" ? " btn-primary" : ""}" onclick="buyTier(${index})">Get ${escapeHtml(tier.name.split(" ")[0])} Key →</button>
-    </div>
-  `;
 }
 
 function setupCrtToggle() {
@@ -331,7 +334,7 @@ function setupModal() {
   openInviteBtn?.addEventListener("click", () => window.open(DISCORD_INVITE_URL, "_blank"));
 
   copyDetailsBtn?.addEventListener("click", () => {
-    const details = `Order SKU: ${selectedTier ? selectedTier.sku : "SKU-CATGAME"}\nProduct: CatGame\nTier: ${selectedTier ? selectedTier.name + " (" + selectedTier.price + ")" : "General Access"}\nDiscord Tag: ${DISCORD_USERNAME}`;
+    const details = `Order SKU: ${selectedTier ? selectedTier.sku : "SKU-CATGAME"}\nProduct: CatGame\nTier: ${selectedTier ? selectedTier.name + " (" + selectedTier.price + " " + selectedTier.cadence + ")" : "General Access"}\nDiscord Tag: ${DISCORD_USERNAME}`;
     navigator.clipboard.writeText(details).then(() => {
       copyDetailsBtn.innerText = "✔ COPIED TO CLIPBOARD!";
       setTimeout(() => { copyDetailsBtn.innerText = "Copy Order Details"; }, 2000);
@@ -342,10 +345,10 @@ function setupModal() {
 function openModal(tier) {
   selectedTier = tier;
   const modal = document.getElementById("checkout-modal");
-  document.getElementById("modal-item-title").innerText = `${CATGAME.title} [${tier.name}]`;
-  document.getElementById("modal-item-price").innerText = `${tier.price} (${tier.cadence})`;
+  document.getElementById("modal-item-title").innerText = `CatGame [${tier.name} Key]`;
+  document.getElementById("modal-item-price").innerText = `${tier.price} ${tier.cadence}`;
   document.getElementById("modal-item-sku").innerText = tier.sku;
-  document.getElementById("modal-item-desc").innerText = `Device Limit: ${tier.devices} | Solve Delay: ${tier.delay}`;
+  document.getElementById("modal-item-desc").innerText = tier.specs.join(" • ");
   modal?.classList.add("active");
 }
 
@@ -354,7 +357,7 @@ function closeModal() {
 }
 
 window.buyTier = function (tierIndex) {
-  const tier = CATGAME.tiers[tierIndex];
+  const tier = TIERS[tierIndex];
   if (!tier) return;
   openModal(tier);
 };
