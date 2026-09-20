@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <script src="https://cdn.jsdelivr.net/npm/navigo@8.11.1/lib/navigo.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/navigo@8.11.1/lib/navigo.min.js"></script>
 </head>
 <body class="crt-enabled">
 
@@ -28,42 +28,31 @@
   <nav class="main-nav">
     <a href="/" class="nav-brand" data-navigo>
       Itz0Cat
-      <span class="brand-badge">DEV PROFILE</span>
+      <span class="brand-badge">DEV</span>
     </a>
     <ul class="nav-links">
-      <li><a href="/" class="nav-link" data-navigo data-route="home"><span class="nav-idx">01</span> Profile</a></li>
-      <li><a href="/store" class="nav-link" data-navigo data-route="store"><span class="nav-idx">02</span> CatGame Store</a></li>
-      <li><a href="/projects" class="nav-link" data-navigo data-route="projects"><span class="nav-idx">03</span> Projects</a></li>
-      <li><a href="/skills" class="nav-link" data-navigo data-route="skills"><span class="nav-idx">04</span> Dev Skills</a></li>
-      <li><a href="/tickets" class="nav-link" data-navigo data-route="tickets"><span class="nav-idx">05</span> Tickets</a></li>
+      <li><a href="/" class="nav-link" data-navigo data-route="home"><span class="nav-idx">01</span> Home</a></li>
+      <li><a href="/shop" class="nav-link" data-navigo data-route="shop"><span class="nav-idx">02</span> Shop</a></li>
     </ul>
   </nav>
 
   <main id="app-view"></main>
 
   <footer>
-    <div class="footer-grid">
+    <div class="footer-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
       <div class="footer-col">
-        <h4>CatGame Store</h4>
+        <h4>CatGame Shop</h4>
         <ul>
-          <li><a href="/store" data-navigo>Iron / Gold / Diamond Keys</a></li>
-          <li><a href="/store" data-navigo>Solver Terminal Demo</a></li>
+          <li><a href="/shop" data-navigo>Iron / Gold / Diamond Keys</a></li>
+          <li><a href="/shop" data-navigo>Solver Terminal Simulator</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Projects</h4>
-        <ul>
-          <li><a href="/projects" data-navigo>CatTags (Fabric mod)</a></li>
-          <li><a href="/projects" data-navigo>Cat Client</a></li>
-          <li><a href="/projects" data-navigo>PocketVPS</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Elsewhere</h4>
+        <h4>Connect</h4>
         <ul>
           <li><a href="https://github.com/itz0cat" target="_blank" rel="noopener">GitHub (@Itz0Cat)</a></li>
           <li><a href="https://discord.gg/WTR52mYMF" target="_blank" rel="noopener">Discord Server</a></li>
-          <li><a href="/tickets" data-navigo>Order / Support Tickets</a></li>
+          <li><a href="https://discord.com/channels/1263147204940533781/1538574462553690112" target="_blank" rel="noopener">Discord #tickets</a></li>
         </ul>
       </div>
     </div>
@@ -106,3 +95,4 @@
 <script src="app.js"></script>
 </body>
 </html>
+

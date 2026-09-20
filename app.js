@@ -1,5 +1,5 @@
 /**
- * ITZ0CAT DEV PROFILE // NAVIGO SPA ROUTER & APP LOGIC
+ * ITZ0CAT DEV PROFILE & CATGAME SHOP // NAVIGO SPA ROUTER
  */
 
 const DISCORD_TICKET_URL = "https://discord.com/channels/1263147204940533781/1538574462553690112";
@@ -10,45 +10,65 @@ const GITHUB_URL = "https://github.com/itz0cat";
 const PROFILE = {
   name: "Itz0Cat",
   tagline: "Minecraft Fabric modder & solo indie dev.",
-  bio: "Building Fabric mods, self-hosted backends, and dev tooling — mostly from a phone via Termux. Currently shipping CatTags (team-identity mod) and Cat Client (QoL/PvP client), both targeting Java Edition 1.21.11.",
-  stack: ["Java / Fabric API", "Node.js", "PostgreSQL", "Render", "GitHub Actions", "Antigravity CLI (agy)"]
+  bio: "Building Fabric mods, clients, and dev tooling. Creator of CatGame Flagship Auto-Solver, CatTags, and Cat Client for Java Edition 1.21.11.",
+  stack: ["Java / Fabric API", "Node.js", "PostgreSQL", "Render", "GitHub Actions"]
 };
 
 // CATGAME STORE — flagship product, sold via Discord ticket
 const CATGAME = {
   id: "catgame-mod",
-  title: "CatGame Flagship Mod",
+  title: "CatGame Flagship Auto-Solver",
   badge: "Flagship Auto-Solver",
-  description: "Undetected Minecraft Fabric 1.21.11 chat-game auto-solver. Solves fill-in-the-gaps, unscramble, math, reverse, and trivia with humanized delays and predictive radar warnings.",
+  description: "Undetected Minecraft Fabric 1.21.11 chat-game auto-solver. Solves fill-in-the-gaps, unscramble, math, reverse, and trivia with humanized delays and predictive radar.",
   tags: ["Fabric 1.21.11", "0.8s Fastest", "2,466+ Words"],
   sku: "SKU-CATGAME-SOLVER",
   tiers: [
-    { name: "Iron Tier", price: "₹80", cadence: "Lifetime Permanent", delay: "4.0s (Fixed)", devices: "1 Device", sku: "CATGAME-IRON-LIFETIME", specs: ["Fixed 4.0s humanized delay", "1 Device allocation (HWID locked)", "Permanent lifetime access", "All 6 core game solvers included"] },
-    { name: "Gold Tier", price: "₹20/wk (or ₹70/mo)", cadence: "Subscription", delay: "2.5s (Down to 2.0s)", devices: "2 Devices", sku: "CATGAME-GOLD-SUB", specs: ["Adjustable delay: 2.5s down to 2.0s", "In-game /cat delay unlocked", "2 Devices allocation (PC + Mobile)", "Priority solver backend queue"] },
-    { name: "Diamond Tier", price: "₹40/wk (or ₹140/mo)", cadence: "Subscription", delay: "0.8s (Down to 0.1s)", devices: "5 Devices", sku: "CATGAME-DIAMOND-VIP", specs: ["Near-instant 0.8s delay (down to 0.1s)", "Unrestricted in-game delay control", "5 Devices allocation (Clan / Multi-box)", "24/7 custom server trivia additions"] }
+    {
+      name: "Iron Tier",
+      price: "₹80",
+      cadence: "Lifetime Permanent",
+      delay: "4.0s (Fixed)",
+      devices: "1 Device",
+      sku: "CATGAME-IRON-LIFETIME",
+      specs: [
+        "Fixed 4.0s humanized delay",
+        "1 Device allocation (HWID locked)",
+        "Permanent lifetime access",
+        "All 6 core game solvers included"
+      ]
+    },
+    {
+      name: "Gold Tier",
+      price: "₹20/wk (or ₹70/mo)",
+      cadence: "Subscription",
+      delay: "2.5s (Down to 2.0s)",
+      devices: "2 Devices",
+      sku: "CATGAME-GOLD-SUB",
+      specs: [
+        "Adjustable delay: 2.5s down to 2.0s",
+        "In-game /cat delay unlocked",
+        "2 Devices allocation (PC + Mobile)",
+        "Priority solver backend queue"
+      ]
+    },
+    {
+      name: "Diamond Tier",
+      price: "₹40/wk (or ₹140/mo)",
+      cadence: "Subscription",
+      delay: "0.8s (Down to 0.1s)",
+      devices: "5 Devices",
+      sku: "CATGAME-DIAMOND-VIP",
+      specs: [
+        "Near-instant 0.8s delay (down to 0.1s)",
+        "Unrestricted in-game delay control",
+        "5 Devices allocation (Clan / Multi-box)",
+        "24/7 custom server trivia additions"
+      ]
+    }
   ]
 };
 
-// PROJECTS — free/open, link out to GitHub, no checkout
-const PROJECTS = [
-  { id: "cattags", badge: "Fabric Mod", title: "CatTags", description: "Team-identity/tag Fabric mod with a Render-hosted Node + PostgreSQL backend, Better Auth, and Discord OAuth sign-in.", tags: ["Fabric 1.21.11", "Render Backend", "Better Auth"], link: "https://cattags-api.onrender.com" },
-  { id: "catclient", badge: "Utility Client", title: "Cat Client", description: "Custom Fabric QoL/PvP client — fullbright, zoom, freelook, ArmorHUD, cloud profile sync, in-game badges for other Cat Client users.", tags: ["Fabric 1.21.11", "PvP HUD", "Fullbright"], link: GITHUB_URL },
-  { id: "pocketvps", badge: "Prototype", title: "PocketVPS", description: "Turns an Android device into a 24/7 lightweight Linux server via Termux, process keepalives, and remote port-forwarding.", tags: ["Termux", "Android Server", "DevOps"], link: GITHUB_URL },
-  { id: "catbot", badge: "Prototype", title: "CatBot & Ticket Manager", description: "Discord bot architecture for automated ticket dispatch, HWID resets, and server status monitoring.", tags: ["Discord.js", "Automation"], link: GITHUB_URL }
-];
-
-// SKILLS — agentic/dev-workflow skills, link out
-const SKILLS = [
-  { id: "skill-minecraft-modding", badge: "Agent Skill", title: "Minecraft Modding Agent Skill", description: "Agentic workflow for Fabric 1.21+, mixins, custom registries, packet handling, and automated Gradle/CI pipelines.", tags: ["Fabric API", "Mixins", "Java 21"], link: GITHUB_URL },
-  { id: "skill-neobrutalism", badge: "Design Skill", title: "Neobrutalism Design System Skill", description: "Bold borders, high-contrast type, WCAG 2.2 AA accessibility, semantic color tokens.", tags: ["Design System", "WCAG 2.2 AA"], link: GITHUB_URL },
-  { id: "skill-typography", badge: "Design Skill", title: "Typography Mastery Skill", description: "Modular type scales, measure constraints, letter tracking, and font pairing for interfaces.", tags: ["Typography", "Modular Scale"], link: GITHUB_URL }
-];
-
 const router = new Navigo("/", { hash: false });
-
-// PROJECTS/SKILLS page filter+search state — scoped per page, reset on entry
-let listCategory = "all";
-let listQuery = "";
 let selectedTier = null;
 
 function escapeHtml(str) {
@@ -65,12 +85,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function initRouter() {
   router
-    .on("/", () => { setActiveNav("home"); renderProfilePage(); })
-    .on("/store", () => { setActiveNav("store"); renderStorePage(); })
-    .on("/projects", () => { setActiveNav("projects"); renderListPage("projects", PROJECTS, "Projects", "Shipped Minecraft mods, clients, and infrastructure prototypes."); })
-    .on("/skills", () => { setActiveNav("skills"); renderListPage("skills", SKILLS, "Dev Skills", "Agentic-coding and design skills used across my projects."); })
-    .on("/tickets", () => { setActiveNav("tickets"); renderTicketsPage(); })
-    .notFound(() => { setActiveNav("home"); renderProfilePage(); })
+    .on("/", () => { setActiveNav("home"); renderHomePage(); })
+    .on("/shop", () => { setActiveNav("shop"); renderShopPage(); })
+    .on("/store", () => { router.navigate("/shop"); })
+    .on("/catgame", () => { router.navigate("/shop"); })
+    .on("/projects", () => { router.navigate("/"); })
+    .on("/skills", () => { router.navigate("/"); })
+    .on("/tickets", () => { router.navigate("/shop"); })
+    .notFound(() => { setActiveNav("home"); renderHomePage(); })
     .resolve();
 }
 
@@ -82,16 +104,16 @@ function setActiveNav(route) {
 }
 
 // -------------------------------------------------------------
-// PAGE: DEV PROFILE (home)
+// PAGE: HOME (Dev Profile & Flagship Highlight)
 // -------------------------------------------------------------
-function renderProfilePage() {
+function renderHomePage() {
   const appView = document.getElementById("app-view");
   if (!appView) return;
 
   appView.innerHTML = `
     <section class="hero">
       <div>
-        <div class="hero-tag">Dev Profile</div>
+        <div class="hero-tag">Developer Profile</div>
         <h1 class="hero-title">${escapeHtml(PROFILE.name)}</h1>
         <p class="hero-desc"><b>${escapeHtml(PROFILE.tagline)}</b><br>${escapeHtml(PROFILE.bio)}</p>
 
@@ -100,18 +122,17 @@ function renderProfilePage() {
         </div>
 
         <div class="hero-cta-group">
-          <a href="/store" class="btn btn-primary" data-navigo>CatGame Store →</a>
-          <a href="/projects" class="btn" data-navigo>View Projects →</a>
+          <a href="/shop" class="btn btn-primary" data-navigo>Go to Shop →</a>
           <a href="${GITHUB_URL}" class="btn" target="_blank" rel="noopener">GitHub ↗</a>
-          <a href="/tickets" class="btn btn-discord" data-navigo>Open Discord Ticket ↗</a>
+          <a href="${DISCORD_INVITE_URL}" class="btn btn-discord" target="_blank" rel="noopener">Discord Server ↗</a>
         </div>
       </div>
     </section>
 
     <div class="section-header">
-      <span class="section-tag">[ 01 // Flagship ]</span>
+      <span class="section-tag">[ Flagship Product ]</span>
       <span class="section-line"></span>
-      <span class="section-index">CATGAME STORE</span>
+      <span class="section-index">SHOP</span>
     </div>
 
     <div class="flagship-showcase">
@@ -122,17 +143,10 @@ function renderProfilePage() {
         </div>
       </div>
       <p class="flagship-desc">${escapeHtml(CATGAME.description)}</p>
-      <a href="/store" class="btn btn-primary btn-sm" data-navigo>View Tiers & Buy →</a>
-    </div>
-
-    <div class="section-header">
-      <span class="section-tag">[ 02 // Projects ]</span>
-      <span class="section-line"></span>
-      <span class="section-index">FEATURED</span>
-    </div>
-
-    <div class="product-grid">
-      ${PROJECTS.slice(0, 3).map(p => productCardHtml(p)).join("")}
+      <div class="product-tags" style="margin-bottom:1.25rem;">
+        ${CATGAME.tags.map(t => `<span class="product-tag">${escapeHtml(t)}</span>`).join("")}
+      </div>
+      <a href="/shop" class="btn btn-primary btn-sm" data-navigo>View Key Tiers & Demo (From ₹20) →</a>
     </div>
   `;
 
@@ -140,20 +154,20 @@ function renderProfilePage() {
 }
 
 // -------------------------------------------------------------
-// PAGE: CATGAME STORE
+// PAGE: SHOP (CatGame Tiers & Terminal Simulator)
 // -------------------------------------------------------------
-function renderStorePage() {
+function renderShopPage() {
   const appView = document.getElementById("app-view");
   if (!appView) return;
 
   appView.innerHTML = `
     <div class="breadcrumb">
-      <a href="/" data-navigo>Profile</a><span class="sep">/</span><span class="current">CatGame Store</span>
+      <a href="/" data-navigo>Home</a><span class="sep">/</span><span class="current">Shop</span>
     </div>
 
     <div class="page-intro">
-      <div class="hero-tag">Flagship Auto-Solver // Fabric 1.21.11</div>
-      <h1 class="page-title">CatGame: Undetected Chat Game Auto-Solver</h1>
+      <div class="hero-tag">Fabric 1.21.11 // Flagship Store</div>
+      <h1 class="page-title">CatGame Auto-Solver</h1>
       <p class="page-desc">${escapeHtml(CATGAME.description)}</p>
     </div>
 
@@ -164,13 +178,13 @@ function renderStorePage() {
       </div>
       <div class="demo-presets">
         <button class="preset-btn" data-prompt="_rown Co_cret_ ___d__">Fill Gaps</button>
-        <button class="preset-btn" data-prompt="What is 14 * 7 - (20 / 4)?">Math Expression</button>
+        <button class="preset-btn" data-prompt="What is 14 * 7 - (20 / 4)?">Math</button>
         <button class="preset-btn" data-prompt="Unscramble epCerre">Unscramble</button>
-        <button class="preset-btn" data-prompt="Reverse pQLVEQ">Reverse String</button>
-        <button class="preset-btn" data-prompt="How many blocks high can a player build in the nether?">Trivia Question</button>
+        <button class="preset-btn" data-prompt="Reverse pQLVEQ">Reverse</button>
+        <button class="preset-btn" data-prompt="How many blocks high can a player build in the nether?">Trivia</button>
       </div>
       <div id="sim-console" class="demo-console">
-        <div><span class="msg-header">[SYSTEM]</span> Simulator ready. Click a preset or type a challenge.</div>
+        <div><span class="msg-header">[SYSTEM]</span> Simulator ready. Click a preset above or type a prompt.</div>
       </div>
       <div class="demo-controls">
         <input id="sim-input" type="text" class="demo-input" placeholder="Type a chat game prompt...">
@@ -179,9 +193,9 @@ function renderStorePage() {
     </div>
 
     <div class="section-header">
-      <span class="section-tag">[ Key Access Tiers ]</span>
+      <span class="section-tag">[ License Keys ]</span>
       <span class="section-line"></span>
-      <span class="section-index">HWID LICENSED</span>
+      <span class="section-index">INSTANT HWID DISPATCH</span>
     </div>
 
     <div id="catgame-tiers" class="tier-grid">
@@ -214,80 +228,6 @@ function tierCardHtml(tier, index) {
       <button class="btn btn-sm${cls === "diamond" ? " btn-primary" : ""}" onclick="buyTier(${index})">Get ${escapeHtml(tier.name.split(" ")[0])} Key →</button>
     </div>
   `;
-}
-
-// -------------------------------------------------------------
-// PAGE: PROJECTS / SKILLS (shared list renderer, free items — no checkout)
-// -------------------------------------------------------------
-function renderListPage(key, items, title, desc) {
-  listCategory = "all";
-  listQuery = "";
-
-  const appView = document.getElementById("app-view");
-  if (!appView) return;
-
-  appView.innerHTML = `
-    <div class="breadcrumb">
-      <a href="/" data-navigo>Profile</a><span class="sep">/</span><span class="current">${escapeHtml(title)}</span>
-    </div>
-    <div class="page-intro">
-      <h1 class="page-title">${escapeHtml(title)}</h1>
-      <p class="page-desc">${escapeHtml(desc)}</p>
-    </div>
-    <div class="search-wrapper">
-      <input id="search-input" type="text" class="search-input" placeholder="Search ${escapeHtml(title.toLowerCase())} by title, keyword, or tag...">
-    </div>
-    <div id="product-grid" class="product-grid"></div>
-  `;
-
-  router.updatePageLinks();
-  renderGrid(items);
-  setupSearch(items);
-}
-
-function renderGrid(items) {
-  const grid = document.getElementById("product-grid");
-  if (!grid) return;
-
-  const filtered = items.filter(p => {
-    const q = listQuery;
-    return p.title.toLowerCase().includes(q) ||
-           p.description.toLowerCase().includes(q) ||
-           p.tags.some(t => t.toLowerCase().includes(q));
-  });
-
-  if (filtered.length === 0) {
-    grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 3rem; background: var(--bg-surface); border: 1px dashed var(--line); font-family: var(--font-mono); color: var(--dim);">[!] NO RESULTS FOR "${escapeHtml(listQuery)}"</div>`;
-    return;
-  }
-
-  grid.innerHTML = filtered.map(p => productCardHtml(p)).join("");
-}
-
-function productCardHtml(p) {
-  return `
-    <div class="product-card">
-      <div>
-        <div class="product-type">${escapeHtml(p.badge)}</div>
-        <h3 class="product-title">${escapeHtml(p.title)}</h3>
-        <p class="product-desc">${escapeHtml(p.description)}</p>
-        <div class="product-tags">${p.tags.map(t => `<span class="product-tag">${escapeHtml(t)}</span>`).join("")}</div>
-      </div>
-      <div class="product-footer">
-        <span class="product-price">Open Source</span>
-        <a class="btn btn-sm" href="${escapeHtml(p.link)}" target="_blank" rel="noopener">View →</a>
-      </div>
-    </div>
-  `;
-}
-
-function setupSearch(items) {
-  const searchInput = document.getElementById("search-input");
-  if (!searchInput) return;
-  searchInput.addEventListener("input", (e) => {
-    listQuery = e.target.value.toLowerCase().trim();
-    renderGrid(items);
-  });
 }
 
 function setupCrtToggle() {
@@ -324,7 +264,7 @@ function setupSimulator() {
   });
 
   function executeSimulation(promptText) {
-    appendConsoleLine(`<span class="msg-header">[CHATGAMES]</span> <span class="msg-prompt">Incoming challenge: "${escapeHtml(promptText)}"</span>`);
+    appendConsoleLine(`<span class="msg-header">[CHATGAMES]</span> <span class="msg-prompt">Incoming: "${escapeHtml(promptText)}"</span>`);
 
     let answer = null;
     let type = "UNKNOWN";
@@ -391,7 +331,7 @@ function setupModal() {
   openInviteBtn?.addEventListener("click", () => window.open(DISCORD_INVITE_URL, "_blank"));
 
   copyDetailsBtn?.addEventListener("click", () => {
-    const details = `Order SKU: ${selectedTier ? selectedTier.sku : "SKU-GENERAL"}\nProduct: CatGame\nTier: ${selectedTier ? selectedTier.name + " (" + selectedTier.price + ")" : "General Access"}\nDiscord Tag: ${DISCORD_USERNAME}`;
+    const details = `Order SKU: ${selectedTier ? selectedTier.sku : "SKU-CATGAME"}\nProduct: CatGame\nTier: ${selectedTier ? selectedTier.name + " (" + selectedTier.price + ")" : "General Access"}\nDiscord Tag: ${DISCORD_USERNAME}`;
     navigator.clipboard.writeText(details).then(() => {
       copyDetailsBtn.innerText = "✔ COPIED TO CLIPBOARD!";
       setTimeout(() => { copyDetailsBtn.innerText = "Copy Order Details"; }, 2000);
@@ -418,43 +358,3 @@ window.buyTier = function (tierIndex) {
   if (!tier) return;
   openModal(tier);
 };
-
-// -------------------------------------------------------------
-// PAGE: TICKETS
-// -------------------------------------------------------------
-function renderTicketsPage() {
-  const appView = document.getElementById("app-view");
-  if (!appView) return;
-
-  appView.innerHTML = `
-    <div class="breadcrumb"><a href="/" data-navigo>Profile</a><span class="sep">/</span><span class="current">Tickets</span></div>
-
-    <div class="page-intro">
-      <div class="hero-tag">Manual Order Fulfillment // Zero Fraud</div>
-      <h1 class="page-title">Discord Ticket Dispatch</h1>
-      <p class="page-desc">To ensure instant HWID binding and direct setup assistance, all CatGame key purchases are processed through the Discord ticket system.</p>
-    </div>
-
-    <div class="ticket-dispatch-card">
-      <h3 style="font-family:var(--font-display); font-size:1.5rem; text-transform:uppercase; margin-bottom:1rem;">How Order Fulfillment Works</h3>
-      <ul class="ticket-step-list">
-        <li><div class="step-num">01</div><div class="step-content"><h4>Join Server & Open Ticket</h4><p>Join the Discord server and open a ticket in <code>#tickets</code>.</p></div></li>
-        <li><div class="step-num">02</div><div class="step-content"><h4>Select Your Tier / SKU</h4><p>Tell the bot or admin which key you need (e.g. <code>CATGAME-IRON-LIFETIME</code>).</p></div></li>
-        <li><div class="step-num">03</div><div class="step-content"><h4>Instant HWID Binding & Key Delivery</h4><p>Your license key is generated, HWID-bound, and delivered with install instructions.</p></div></li>
-      </ul>
-      <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:2rem;">
-        <button class="btn btn-discord" onclick="window.open('${DISCORD_TICKET_URL}', '_blank')">Direct Ticket Channel (#tickets) ↗</button>
-        <button class="btn" onclick="window.open('${DISCORD_INVITE_URL}', '_blank')">Join Discord Server (Invite) ↗</button>
-        <button id="dispatch-copy-tag" class="btn">Copy Developer Tag (${DISCORD_USERNAME})</button>
-      </div>
-    </div>
-  `;
-
-  router.updatePageLinks();
-  document.getElementById("dispatch-copy-tag")?.addEventListener("click", function () {
-    navigator.clipboard.writeText(DISCORD_USERNAME).then(() => {
-      this.innerText = "✔ COPIED: " + DISCORD_USERNAME;
-      setTimeout(() => { this.innerText = `Copy Developer Tag (${DISCORD_USERNAME})`; }, 2000);
-    });
-  });
-}
