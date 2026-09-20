@@ -1,6 +1,6 @@
 /**
  * ITZ0CAT // DEV PROFILE & CATGAME SHOP // NAVIGO SPA
- * Built using the prototype.html reference aesthetic and neobrutalism design tokens
+ * Applied Skills: typography (type scale & measure) + neobrutalism (tactile tokens & shadows) + brainstorming (streamlined conversion)
  */
 
 const DISCORD_TICKET_URL = "https://discord.com/channels/1263147204940533781/1538574462553690112";
@@ -130,15 +130,15 @@ function renderHomePage() {
       <div class="feature">
         <span class="id">02</span>
         <div>
-          <h4>Three Key Tiers</h4>
-          <p>Iron, Gold, and Diamond each unlock faster solve delays and multi-device slots. Pick what fits.</p>
+          <h4>0.8s Ultra-Fast Solves</h4>
+          <p>Solves fill-in-the-gaps, math, unscramble, reverse strings, and trivia before anyone else.</p>
         </div>
       </div>
       <div class="feature">
         <span class="id">03</span>
         <div>
-          <h4>No Lock-in</h4>
-          <p>Weekly keys cancel anytime. Iron key is a one-time permanent buy that is yours for good.</p>
+          <h4>2,466+ Item Dictionary</h4>
+          <p>Comprehensive local item, block, and mob dictionary for instant match accuracy.</p>
         </div>
       </div>
     </div>
