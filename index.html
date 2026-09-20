@@ -7,7 +7,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/styles.css">
+  <!-- Navigo Client-Side Router -->
+  <script src="https://cdn.jsdelivr.net/npm/navigo@8.11.1/lib/navigo.min.js"></script>
 </head>
 <body class="crt-enabled">
 
@@ -25,189 +27,45 @@
     </div>
   </header>
 
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <div>
-      <div class="hero-tag">Official Store & Digital Foundry</div>
-      <h1 class="hero-title">
-        The Ultimate<br>
-        <span class="accent">Cat Game</span> Foundry
-      </h1>
-      <p class="hero-desc">
-        High-performance Minecraft utility mods, sub-second chat game auto-solvers, agentic AI developer skills, and custom client prototypes. Built by <b>@Itz0Cat</b>.
-      </p>
+  <!-- NAVIGO MAIN NAVIGATION BAR -->
+  <nav class="main-nav">
+    <a href="/" class="nav-brand" data-navigo>
+      Cat Foundry
+      <span class="brand-badge">SPA // NAVIGO</span>
+    </a>
+    <ul class="nav-links">
+      <li>
+        <a href="/" class="nav-link" data-navigo data-route="home">
+          <span class="nav-idx">01</span> Home
+        </a>
+      </li>
+      <li>
+        <a href="/catgame" class="nav-link" data-navigo data-route="catgame">
+          <span class="nav-idx">02</span> CatGame Mod
+        </a>
+      </li>
+      <li>
+        <a href="/skills" class="nav-link" data-navigo data-route="skills">
+          <span class="nav-idx">03</span> Dev Skills
+        </a>
+      </li>
+      <li>
+        <a href="/prototypes" class="nav-link" data-navigo data-route="prototypes">
+          <span class="nav-idx">04</span> Prototypes
+        </a>
+      </li>
+      <li>
+        <a href="/tickets" class="nav-link" data-navigo data-route="tickets">
+          <span class="nav-idx">05</span> Tickets & Buy
+        </a>
+      </li>
+    </ul>
+  </nav>
 
-      <!-- METRIC STRIP -->
-      <div class="hero-stats">
-        <div class="stat-item">
-          <div class="stat-num">2,466+</div>
-          <div class="stat-label">Dictionary Entries</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">0.8s</div>
-          <div class="stat-label">Fastest Solve Speed</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">100%</div>
-          <div class="stat-label">Detection Avoidance</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">24/7</div>
-          <div class="stat-label">Discord Ticket Support</div>
-        </div>
-      </div>
-
-      <div class="hero-cta-group">
-        <a href="#catgame-showcase" class="btn btn-primary">Explore CatGame Mod ↓</a>
-        <a href="#universal-products" class="btn">Browse All Products →</a>
-        <button class="btn btn-discord" onclick="window.open('https://discord.gg/WTR52mYMF', '_blank')">
-          Join Discord (#tickets) ↗
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECTION 01: FLAGSHIP SHOWCASE -->
-  <div id="catgame-showcase" class="section-header">
-    <span class="section-tag">[ 01 // Flagship Mod ]</span>
-    <span class="section-line"></span>
-    <span class="section-index">CATGAME FABRIC 1.21.11</span>
-  </div>
-
-  <div class="flagship-showcase">
-    <div class="flagship-header">
-      <div>
-        <span class="flagship-badge">High Performance Auto-Solver</span>
-        <h2 class="flagship-title">CatGame: Undetected Auto-Solver & Radar</h2>
-      </div>
-      <button class="btn btn-primary btn-sm" onclick="handleProductAction('catgame-mod')">View Tiers & Pricing</button>
-    </div>
-    
-    <p class="flagship-desc">
-      Unlike basic chat responders, CatGame is engineered for competitive Minecraft multiplayer servers (BananaSMP, Lifesteal, BoxPvP). It handles fill-in-the-gaps, full arithmetic expressions, multi-word unscrambles, string reversal, and server trivia with natural human jitter and predictive cooldown radar warnings.
-    </p>
-
-    <!-- INTERACTIVE SOLVER SIMULATOR -->
-    <div class="solver-demo">
-      <div class="demo-bar">
-        <span class="demo-title">
-          <span style="color:var(--green)">●</span> LIVE SOLVER TERMINAL SIMULATOR
-        </span>
-        <span>ENGINE: CATGAME-v3.0</span>
-      </div>
-
-      <div class="demo-presets">
-        <button class="preset-btn" data-prompt="_rown Co_cret_ ___d__">Fill Gaps</button>
-        <button class="preset-btn" data-prompt="What is 14 * 7 - (20 / 4)?">Math Expression</button>
-        <button class="preset-btn" data-prompt="Unscramble epCerre">Unscramble</button>
-        <button class="preset-btn" data-prompt="Reverse pQLVEQ">Reverse String</button>
-        <button class="preset-btn" data-prompt="How many blocks high can a player build in the nether?">Trivia Question</button>
-      </div>
-
-      <div id="sim-console" class="demo-console">
-        <div><span class="msg-header">[SYSTEM]</span> Solver simulator initialized. Choose a preset above or type a chat game challenge below.</div>
-      </div>
-
-      <div class="demo-controls">
-        <input id="sim-input" type="text" class="demo-input" placeholder="Type a chat game prompt (e.g. Unscramble epCerre)...">
-        <button id="sim-solve-btn" class="btn btn-primary btn-sm">Solve</button>
-      </div>
-    </div>
-
-    <!-- TIER CARDS -->
-    <div id="catgame-tiers" class="tier-grid">
-      <!-- 1. IRON TIER -->
-      <div class="tier-card iron">
-        <div>
-          <div class="tier-top">
-            <div class="tier-name">Iron Tier</div>
-            <span class="tier-tag">Lifetime</span>
-          </div>
-          <div class="tier-price-wrap">
-            <span class="tier-price">₹80</span>
-            <span class="tier-cadence">/ permanent</span>
-          </div>
-          <ul class="tier-specs">
-            <li>Fixed 4.0s humanized delay</li>
-            <li>1 Device allocation (HWID locked)</li>
-            <li>Permanent lifetime access</li>
-            <li>All 6 core game solvers included</li>
-            <li>100% human typist safety</li>
-          </ul>
-        </div>
-        <button class="btn btn-sm" onclick="buyTier(0)">Get Iron Key →</button>
-      </div>
-
-      <!-- 2. GOLD TIER -->
-      <div class="tier-card gold">
-        <div>
-          <div class="tier-top">
-            <div class="tier-name">Gold Tier</div>
-            <span class="tier-tag">Subscription</span>
-          </div>
-          <div class="tier-price-wrap">
-            <span class="tier-price">₹20</span>
-            <span class="tier-cadence">/ week (or ₹70/mo)</span>
-          </div>
-          <ul class="tier-specs">
-            <li>Adjustable delay: 2.0s – 10.0s</li>
-            <li>In-game <code>/cat delay</code> unlocked</li>
-            <li>2 Devices allocation (PC + Mobile)</li>
-            <li>Priority solver backend queue</li>
-            <li>~80% server round win rate</li>
-          </ul>
-        </div>
-        <button class="btn btn-sm" onclick="buyTier(1)">Get Gold Key →</button>
-      </div>
-
-      <!-- 3. DIAMOND TIER -->
-      <div class="tier-card featured diamond">
-        <div>
-          <div class="tier-top">
-            <div class="tier-name">Diamond Tier</div>
-            <span class="tier-tag">VIP Fastest</span>
-          </div>
-          <div class="tier-price-wrap">
-            <span class="tier-price">₹40</span>
-            <span class="tier-cadence">/ week (or ₹140/mo)</span>
-          </div>
-          <ul class="tier-specs">
-            <li>Near-instant 0.8s delay (down to 0.1s)</li>
-            <li>Unrestricted in-game delay control</li>
-            <li>5 Devices allocation (Clan / Multi-box)</li>
-            <li>Instant zero-delay VIP queue</li>
-            <li>24/7 custom server trivia additions</li>
-          </ul>
-        </div>
-        <button class="btn btn-primary btn-sm" onclick="buyTier(2)">Get Diamond Key →</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- SECTION 02: UNIVERSAL PRODUCTS (SKILLS, PROTOTYPES, CLIENTS) -->
-  <div id="universal-products" class="section-header">
-    <span class="section-tag">[ 02 // Universal Catalog ]</span>
-    <span class="section-line"></span>
-    <span class="section-index">ALL PRODUCTS & UNITS</span>
-  </div>
-
-  <!-- CATEGORY FILTER TABS -->
-  <div class="filter-bar">
-    <button class="filter-tab active" data-category="all">[ All Units ]</button>
-    <button class="filter-tab" data-category="mods">[ Minecraft Mods ]</button>
-    <button class="filter-tab" data-category="skills">[ AI & Dev Skills ]</button>
-    <button class="filter-tab" data-category="prototypes">[ Prototypes & Clients ]</button>
-  </div>
-
-  <!-- SEARCH INPUT -->
-  <div class="search-wrapper">
-    <input id="search-input" type="text" class="search-input" placeholder="Search catalog by title, keyword, or tag (e.g. 'Fabric', 'Skill', 'Delay', 'Termux')...">
-  </div>
-
-  <!-- DYNAMIC PRODUCT GRID -->
-  <div id="product-grid" class="product-grid">
-    <!-- Populated dynamically via app.js -->
-  </div>
+  <!-- DYNAMIC VIEW RENDERED BY NAVIGO ROUTER -->
+  <main id="app-view">
+    <!-- View content dynamically rendered by app.js -->
+  </main>
 
   <!-- FOOTER -->
   <footer>
@@ -215,18 +73,18 @@
       <div class="footer-col">
         <h4>Cat Foundry</h4>
         <ul>
-          <li><a href="#catgame-showcase">CatGame Auto-Solver</a></li>
-          <li><a href="#universal-products">CatClient 1.21.11</a></li>
-          <li><a href="#universal-products">PocketVPS Prototype</a></li>
-          <li><a href="#universal-products">CatBot Ticket System</a></li>
+          <li><a href="/catgame" data-navigo>CatGame Auto-Solver</a></li>
+          <li><a href="/prototypes" data-navigo>CatClient 1.21.11</a></li>
+          <li><a href="/prototypes" data-navigo>PocketVPS Prototype</a></li>
+          <li><a href="/prototypes" data-navigo>CatBot Ticket System</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Developer Skills</h4>
         <ul>
-          <li><a href="#universal-products">Minecraft Modding Skill</a></li>
-          <li><a href="#universal-products">Neobrutalism Design Skill</a></li>
-          <li><a href="#universal-products">Typography Mastery Skill</a></li>
+          <li><a href="/skills" data-navigo>Minecraft Modding Skill</a></li>
+          <li><a href="/skills" data-navigo>Neobrutalism Design Skill</a></li>
+          <li><a href="/skills" data-navigo>Typography Mastery Skill</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -234,7 +92,7 @@
         <ul>
           <li><a href="https://discord.gg/WTR52mYMF" target="_blank">Discord Server (Invite)</a></li>
           <li><a href="https://discord.com/channels/1263147204940533781/1538574462553690112" target="_blank">Direct Ticket Channel</a></li>
-          <li><a href="javascript:void(0)" onclick="handleProductAction('catgame-mod')">Manual Key Fulfillment</a></li>
+          <li><a href="/tickets" data-navigo>Ticket Dispatch Guide</a></li>
           <li><a href="https://github.com/itz0cat" target="_blank">Developer GitHub (@Itz0Cat)</a></li>
         </ul>
       </div>
@@ -242,7 +100,7 @@
 
     <div class="footer-bottom">
       <div>© 2026 CatGame Foundry & @Itz0Cat. All rights reserved.</div>
-      <div>STATIC VERCEL BUILD // NO BACKEND REQUIRED // REDIRECT VIA DISCORD TICKETS</div>
+      <div>STATIC VERCEL BUILD // NAVIGO SPA ROUTER // DISCORD TICKET DISPATCH</div>
     </div>
   </footer>
 
@@ -299,6 +157,6 @@
   </div>
 </div>
 
-<script src="app.js"></script>
+<script src="/app.js"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 /**
- * UNIVERSAL SHOP // FRONTEND SCRIPT (VERCEL READY)
- * CatGame Mod, Skills, Prototypes & Discord Ticket Redirect
+ * UNIVERSAL SHOP // NAVIGO SPA ROUTER & APP LOGIC
+ * CatGame Flagship Mod, Skills, Prototypes & Discord Ticket Dispatch
  */
 
 // CONFIGURED DISCORD CHANNELS & INVITE:
@@ -106,23 +106,486 @@ const PRODUCTS = [
   }
 ];
 
+// INITIALIZE NAVIGO ROUTER
+const router = new Navigo("/", { hash: false });
+
 // STATE
 let currentCategory = "all";
 let searchQuery = "";
 let selectedProduct = null;
 let selectedTier = null;
 
-// DOM ELEMENTS
+// SETUP ON DOM LOAD
 document.addEventListener("DOMContentLoaded", () => {
+  setupCrtToggle();
+  setupModal();
+  initRouter();
+});
+
+// ROUTE DEFINITIONS
+function initRouter() {
+  router
+    .on("/", () => {
+      setActiveNav("home");
+      renderHomePage();
+    })
+    .on("/catgame", () => {
+      setActiveNav("catgame");
+      renderCatGamePage();
+    })
+    .on("/skills", () => {
+      setActiveNav("skills");
+      renderSkillsPage();
+    })
+    .on("/prototypes", () => {
+      setActiveNav("prototypes");
+      renderPrototypesPage();
+    })
+    .on("/tickets", () => {
+      setActiveNav("tickets");
+      renderTicketsPage();
+    })
+    .notFound(() => {
+      setActiveNav("home");
+      renderHomePage();
+    })
+    .resolve();
+}
+
+function setActiveNav(route) {
+  document.querySelectorAll(".nav-link").forEach(link => {
+    if (link.getAttribute("data-route") === route) {
+      link.classList.add("active");
+    } else {
+      link.classList.remove("active");
+    }
+  });
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+// -------------------------------------------------------------
+// PAGE 1: HOME PAGE
+// -------------------------------------------------------------
+function renderHomePage() {
+  const appView = document.getElementById("app-view");
+  if (!appView) return;
+
+  appView.innerHTML = `
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div>
+        <div class="hero-tag">Official Store & Digital Foundry</div>
+        <h1 class="hero-title">
+          The Ultimate<br>
+          <span class="accent">Cat Game</span> Foundry
+        </h1>
+        <p class="hero-desc">
+          High-performance Minecraft utility mods, sub-second chat game auto-solvers, agentic AI developer skills, and custom client prototypes. Built by <b>@Itz0Cat</b>.
+        </p>
+
+        <!-- METRIC STRIP -->
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-num">2,466+</div>
+            <div class="stat-label">Dictionary Entries</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">0.8s</div>
+            <div class="stat-label">Fastest Solve Speed</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Detection Avoidance</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">24/7</div>
+            <div class="stat-label">Discord Ticket Support</div>
+          </div>
+        </div>
+
+        <div class="hero-cta-group">
+          <a href="/catgame" class="btn btn-primary" data-navigo>CatGame Flagship Mod →</a>
+          <a href="/skills" class="btn" data-navigo>Browse AI Skills →</a>
+          <a href="/tickets" class="btn btn-discord" data-navigo>Open Discord Ticket (#tickets) ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 01: QUICK CATALOG -->
+    <div class="section-header">
+      <span class="section-tag">[ 01 // Universal Catalog ]</span>
+      <span class="section-line"></span>
+      <span class="section-index">ALL PRODUCTS & UNITS</span>
+    </div>
+
+    <!-- CATEGORY FILTER TABS -->
+    <div class="filter-bar">
+      <button class="filter-tab active" data-category="all">[ All Units ]</button>
+      <button class="filter-tab" data-category="mods">[ Minecraft Mods ]</button>
+      <button class="filter-tab" data-category="skills">[ AI & Dev Skills ]</button>
+      <button class="filter-tab" data-category="prototypes">[ Prototypes & Clients ]</button>
+    </div>
+
+    <!-- SEARCH INPUT -->
+    <div class="search-wrapper">
+      <input id="search-input" type="text" class="search-input" placeholder="Search catalog by title, keyword, or tag (e.g. 'Fabric', 'Skill', 'Delay', 'Termux')...">
+    </div>
+
+    <!-- DYNAMIC PRODUCT GRID -->
+    <div id="product-grid" class="product-grid"></div>
+  `;
+
+  router.updatePageLinks();
   renderProductGrid();
   setupFilterTabs();
   setupSearch();
-  setupCrtToggle();
-  setupSimulator();
-  setupModal();
-});
+}
 
-// 1. RENDER PRODUCTS
+// -------------------------------------------------------------
+// PAGE 2: CATGAME FLAGSHIP MOD DEDICATED PAGE
+// -------------------------------------------------------------
+function renderCatGamePage() {
+  const appView = document.getElementById("app-view");
+  if (!appView) return;
+
+  appView.innerHTML = `
+    <div class="breadcrumb">
+      <a href="/" data-navigo>Home</a>
+      <span class="sep">/</span>
+      <span class="current">CatGame Flagship Mod</span>
+    </div>
+
+    <div class="page-intro">
+      <div class="hero-tag">Flagship Auto-Solver // Universal Fabric 1.21.11</div>
+      <h1 class="page-title">CatGame: Undetected Chat Game Auto-Solver</h1>
+      <p class="page-desc">
+        Engineered specifically for competitive multiplayer servers (BananaSMP, Lifesteal, BoxPvP). Features sub-second solving, a 2,466-word dictionary, full arithmetic expression evaluation, and 20s/10s predictive radar warnings so you never get caught on chat cooldown.
+      </p>
+    </div>
+
+    <!-- INTERACTIVE SOLVER SIMULATOR -->
+    <div class="solver-demo">
+      <div class="demo-bar">
+        <span class="demo-title">
+          <span style="color:var(--green)">●</span> LIVE SOLVER TERMINAL SIMULATOR
+        </span>
+        <span>ENGINE: CATGAME-v3.0</span>
+      </div>
+
+      <div class="demo-presets">
+        <button class="preset-btn" data-prompt="_rown Co_cret_ ___d__">Fill Gaps</button>
+        <button class="preset-btn" data-prompt="What is 14 * 7 - (20 / 4)?">Math Expression</button>
+        <button class="preset-btn" data-prompt="Unscramble epCerre">Unscramble</button>
+        <button class="preset-btn" data-prompt="Reverse pQLVEQ">Reverse String</button>
+        <button class="preset-btn" data-prompt="How many blocks high can a player build in the nether?">Trivia Question</button>
+      </div>
+
+      <div id="sim-console" class="demo-console">
+        <div><span class="msg-header">[SYSTEM]</span> Simulator ready. Click any preset above or enter a challenge to see CatGame solve it.</div>
+      </div>
+
+      <div class="demo-controls">
+        <input id="sim-input" type="text" class="demo-input" placeholder="Type a chat game prompt (e.g. Unscramble epCerre)...">
+        <button id="sim-solve-btn" class="btn btn-primary btn-sm">Solve</button>
+      </div>
+    </div>
+
+    <!-- TIER PRICING GRID -->
+    <div class="section-header">
+      <span class="section-tag">[ Key Access Tiers ]</span>
+      <span class="section-line"></span>
+      <span class="section-index">HWID LICENSED</span>
+    </div>
+
+    <div id="catgame-tiers" class="tier-grid">
+      <!-- 1. IRON TIER -->
+      <div class="tier-card iron">
+        <div>
+          <div class="tier-top">
+            <div class="tier-name">Iron Tier</div>
+            <span class="tier-tag">Lifetime</span>
+          </div>
+          <div class="tier-price-wrap">
+            <span class="tier-price">₹80</span>
+            <span class="tier-cadence">/ permanent</span>
+          </div>
+          <ul class="tier-specs">
+            <li>Fixed 4.0s humanized delay</li>
+            <li>1 Device allocation (HWID locked)</li>
+            <li>Permanent lifetime access</li>
+            <li>All 6 core game solvers included</li>
+            <li>100% human typist safety</li>
+          </ul>
+        </div>
+        <button class="btn btn-sm" onclick="buyTier(0)">Get Iron Key →</button>
+      </div>
+
+      <!-- 2. GOLD TIER -->
+      <div class="tier-card gold">
+        <div>
+          <div class="tier-top">
+            <div class="tier-name">Gold Tier</div>
+            <span class="tier-tag">Subscription</span>
+          </div>
+          <div class="tier-price-wrap">
+            <span class="tier-price">₹20</span>
+            <span class="tier-cadence">/ week (or ₹70/mo)</span>
+          </div>
+          <ul class="tier-specs">
+            <li>Adjustable delay: 2.0s – 10.0s</li>
+            <li>In-game <code>/cat delay</code> unlocked</li>
+            <li>2 Devices allocation (PC + Mobile)</li>
+            <li>Priority solver backend queue</li>
+            <li>~80% server round win rate</li>
+          </ul>
+        </div>
+        <button class="btn btn-sm" onclick="buyTier(1)">Get Gold Key →</button>
+      </div>
+
+      <!-- 3. DIAMOND TIER -->
+      <div class="tier-card featured diamond">
+        <div>
+          <div class="tier-top">
+            <div class="tier-name">Diamond Tier</div>
+            <span class="tier-tag">VIP Fastest</span>
+          </div>
+          <div class="tier-price-wrap">
+            <span class="tier-price">₹40</span>
+            <span class="tier-cadence">/ week (or ₹140/mo)</span>
+          </div>
+          <ul class="tier-specs">
+            <li>Near-instant 0.8s delay (down to 0.1s)</li>
+            <li>Unrestricted in-game delay control</li>
+            <li>5 Devices allocation (Clan / Multi-box)</li>
+            <li>Instant zero-delay VIP queue</li>
+            <li>24/7 custom server trivia additions</li>
+          </ul>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="buyTier(2)">Get Diamond Key →</button>
+      </div>
+    </div>
+
+    <!-- TECHNICAL SPECIFICATION TABLE -->
+    <div class="section-header">
+      <span class="section-tag">[ Technical Architecture ]</span>
+      <span class="section-line"></span>
+      <span class="section-index">BENCHMARKS</span>
+    </div>
+
+    <table class="tech-spec-table">
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th>CatGame Solver</th>
+          <th>Standard / Competitors</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Fill In The Gaps (<code>FILL_GAPS</code>)</td>
+          <td><b style="color:var(--green)">Supported</b> (Multi-word + missing characters)</td>
+          <td>Unsupported</td>
+        </tr>
+        <tr>
+          <td>Wordlist Coverage</td>
+          <td><b style="color:var(--blue)">2,466+ Minecraft items & blocks</b></td>
+          <td>~300 basic English words</td>
+        </tr>
+        <tr>
+          <td>Math Engine</td>
+          <td><b style="color:var(--green)">Arbitrary arithmetic</b> (Parentheses, order of operations, negatives)</td>
+          <td>Basic 2-number operations (<code>A + B</code> only)</td>
+        </tr>
+        <tr>
+          <td>Predictive Cooldown Radar</td>
+          <td><b style="color:var(--gold)">20s & 10s HUD warnings</b> before round starts</td>
+          <td>None (frequent cooldown misses)</td>
+        </tr>
+        <tr>
+          <td>Human Jitter Offset</td>
+          <td>Randomized +0.2s–0.6s offset per round</td>
+          <td>Static or zero delay (high ban risk)</td>
+        </tr>
+      </tbody>
+    </table>
+  `;
+
+  router.updatePageLinks();
+  setupSimulator();
+}
+
+// -------------------------------------------------------------
+// PAGE 3: DEVELOPER & AI SKILLS PAGE
+// -------------------------------------------------------------
+function renderSkillsPage() {
+  const appView = document.getElementById("app-view");
+  if (!appView) return;
+
+  const skills = PRODUCTS.filter(p => p.category === "skills");
+
+  appView.innerHTML = `
+    <div class="breadcrumb">
+      <a href="/" data-navigo>Home</a>
+      <span class="sep">/</span>
+      <span class="current">AI & Developer Skills</span>
+    </div>
+
+    <div class="page-intro">
+      <div class="hero-tag">Agentic Tooling & System Skills</div>
+      <h1 class="page-title">Developer & AI Agent Skills</h1>
+      <p class="page-desc">
+        Specialized prompt engineering packages, architectural guidelines, and system skills for agentic AI coding assistants (Claude Code, Antigravity, Cursor, Copilot).
+      </p>
+    </div>
+
+    <div class="product-grid">
+      ${skills.map(s => `
+        <div class="product-card">
+          <div>
+            <div class="product-type">${s.badge} // ${s.sku}</div>
+            <h3 class="product-title">${s.title}</h3>
+            <p class="product-desc">${s.description}</p>
+            <div class="product-tags">
+              ${s.tags.map(t => `<span class="product-tag">${t}</span>`).join("")}
+            </div>
+          </div>
+          <div class="product-footer">
+            <span class="product-price">${s.price}</span>
+            <button class="btn btn-sm" onclick="handleProductAction('${s.id}')">View Details →</button>
+          </div>
+        </div>
+      `).join("")}
+    </div>
+  `;
+
+  router.updatePageLinks();
+}
+
+// -------------------------------------------------------------
+// PAGE 4: PROTOTYPES & CLIENTS PAGE
+// -------------------------------------------------------------
+function renderPrototypesPage() {
+  const appView = document.getElementById("app-view");
+  if (!appView) return;
+
+  const prototypes = PRODUCTS.filter(p => p.category === "prototypes" || p.id === "catclient");
+
+  appView.innerHTML = `
+    <div class="breadcrumb">
+      <a href="/" data-navigo>Home</a>
+      <span class="sep">/</span>
+      <span class="current">Prototypes & Clients</span>
+    </div>
+
+    <div class="page-intro">
+      <div class="hero-tag">Foundry Labs // Experimental Software</div>
+      <h1 class="page-title">Prototypes & Utility Clients</h1>
+      <p class="page-desc">
+        Experimental utilities, client modifications, and DevOps tooling developed for mobile servers, Discord infrastructure, and competitive gameplay.
+      </p>
+    </div>
+
+    <div class="product-grid">
+      ${prototypes.map(p => `
+        <div class="product-card">
+          <div>
+            <div class="product-type">${p.badge} // ${p.sku}</div>
+            <h3 class="product-title">${p.title}</h3>
+            <p class="product-desc">${p.description}</p>
+            <div class="product-tags">
+              ${p.tags.map(t => `<span class="product-tag">${t}</span>`).join("")}
+            </div>
+          </div>
+          <div class="product-footer">
+            <span class="product-price">${p.price}</span>
+            <button class="btn btn-sm" onclick="handleProductAction('${p.id}')">${p.actionText} →</button>
+          </div>
+        </div>
+      `).join("")}
+    </div>
+  `;
+
+  router.updatePageLinks();
+}
+
+// -------------------------------------------------------------
+// PAGE 5: DISCORD TICKETS & DISPATCH PAGE
+// -------------------------------------------------------------
+function renderTicketsPage() {
+  const appView = document.getElementById("app-view");
+  if (!appView) return;
+
+  appView.innerHTML = `
+    <div class="breadcrumb">
+      <a href="/" data-navigo>Home</a>
+      <span class="sep">/</span>
+      <span class="current">Discord Tickets & Buy</span>
+    </div>
+
+    <div class="page-intro">
+      <div class="hero-tag">Manual Order Fulfillment // Zero Fraud</div>
+      <h1 class="page-title">Discord Ticket Dispatch</h1>
+      <p class="page-desc">
+        To ensure instant HWID binding, fraud-free delivery, and direct setup assistance, all purchases are processed through our official Discord server ticket system.
+      </p>
+    </div>
+
+    <div class="ticket-dispatch-card">
+      <h3 style="font-family:var(--font-display); font-size:1.5rem; text-transform:uppercase; margin-bottom:1rem;">
+        How Order Fulfillment Works
+      </h3>
+
+      <ul class="ticket-step-list">
+        <li>
+          <div class="step-num">01</div>
+          <div class="step-content">
+            <h4>Join Server & Open Ticket</h4>
+            <p>Click the button below to join the Discord server and navigate to the <code>#tickets</code> channel to open an order ticket.</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">02</div>
+          <div class="step-content">
+            <h4>Select Your Tier / SKU</h4>
+            <p>Tell the bot or admin which product you need (e.g. <code>CATGAME-IRON-LIFETIME</code>, <code>CATGAME-GOLD-SUB</code>, or <code>CATGAME-DIAMOND-VIP</code>).</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">03</div>
+          <div class="step-content">
+            <h4>Instant HWID Binding & Key Delivery</h4>
+            <p>Your license key is generated, bound to your hardware ID, and delivered instantly with full installation instructions.</p>
+          </div>
+        </li>
+      </ul>
+
+      <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:2rem;">
+        <button class="btn btn-discord" onclick="window.open('${DISCORD_TICKET_URL}', '_blank')">
+          Direct Ticket Channel (#tickets) ↗
+        </button>
+        <button class="btn" onclick="window.open('${DISCORD_INVITE_URL}', '_blank')">
+          Join Discord Server (Invite) ↗
+        </button>
+        <button id="dispatch-copy-tag" class="btn">
+          Copy Developer Tag (${DISCORD_USERNAME})
+        </button>
+      </div>
+    </div>
+  `;
+
+  router.updatePageLinks();
+
+  document.getElementById("dispatch-copy-tag")?.addEventListener("click", function() {
+    navigator.clipboard.writeText(DISCORD_USERNAME).then(() => {
+      this.innerText = "✔ COPIED: " + DISCORD_USERNAME;
+      setTimeout(() => { this.innerText = `Copy Developer Tag (${DISCORD_USERNAME})`; }, 2000);
+    });
+  });
+}
+
+// -------------------------------------------------------------
+// COMMON UI LOGIC: FILTERS, SEARCH, CRT, SIMULATOR, MODALS
+// -------------------------------------------------------------
 function renderProductGrid() {
   const grid = document.getElementById("product-grid");
   if (!grid) return;
@@ -162,7 +625,6 @@ function renderProductGrid() {
   `).join("");
 }
 
-// 2. FILTER TABS
 function setupFilterTabs() {
   const tabs = document.querySelectorAll(".filter-tab");
   tabs.forEach(tab => {
@@ -175,7 +637,6 @@ function setupFilterTabs() {
   });
 }
 
-// 3. SEARCH
 function setupSearch() {
   const searchInput = document.getElementById("search-input");
   if (!searchInput) return;
@@ -186,7 +647,6 @@ function setupSearch() {
   });
 }
 
-// 4. CRT SCANLINES TOGGLE
 function setupCrtToggle() {
   const toggleBtn = document.getElementById("crt-toggle");
   if (!toggleBtn) return;
@@ -208,7 +668,6 @@ function setupCrtToggle() {
   });
 }
 
-// 5. INTERACTIVE SOLVER SIMULATOR
 function setupSimulator() {
   const consoleEl = document.getElementById("sim-console");
   const inputEl = document.getElementById("sim-input");
@@ -242,7 +701,6 @@ function setupSimulator() {
     let answer = null;
     let type = "UNKNOWN";
 
-    // Gap solver simulation
     if (promptText.includes("_")) {
       type = "FILL_GAPS";
       if (promptText.toLowerCase().includes("rown") && promptText.toLowerCase().includes("cret")) {
@@ -252,9 +710,7 @@ function setupSimulator() {
       } else {
         answer = "Netherite Ingot";
       }
-    }
-    // Math solver simulation
-    else if (/[0-9+\-*\/xX÷]/.test(promptText) && (promptText.toLowerCase().includes("what is") || promptText.toLowerCase().includes("solve") || /[0-9]+\s*[+*\/xX\-]\s*[0-9]+/.test(promptText))) {
+    } else if (/[0-9+\-*\/xX÷]/.test(promptText) && (promptText.toLowerCase().includes("what is") || promptText.toLowerCase().includes("solve") || /[0-9]+\s*[+*\/xX\-]\s*[0-9]+/.test(promptText))) {
       type = "MATH";
       try {
         let cleaned = promptText.replace(/\b(what|is|solve|equation|math|calculate)\b/gi, '')
@@ -266,24 +722,18 @@ function setupSimulator() {
       } catch (e) {
         answer = "42";
       }
-    }
-    // Reverse simulation
-    else if (promptText.toLowerCase().startsWith("reverse") || promptText.toLowerCase().includes("unreverse")) {
+    } else if (promptText.toLowerCase().startsWith("reverse") || promptText.toLowerCase().includes("unreverse")) {
       type = "REVERSE";
       const target = promptText.replace(/^(reverse|unreverse)[:\s]*/i, '').trim();
       answer = target.split('').reverse().join('');
-    }
-    // Unscramble simulation
-    else if (promptText.toLowerCase().startsWith("unscramble") || promptText.toLowerCase().includes("unscramble")) {
+    } else if (promptText.toLowerCase().startsWith("unscramble") || promptText.toLowerCase().includes("unscramble")) {
       type = "UNSCRAMBLE";
       const target = promptText.replace(/^(unscramble)[:\s]*/i, '').trim().toLowerCase();
       if (target.includes("creeper") || target === "epcerre") answer = "Creeper";
       else if (target.includes("skyblock") || target === "lbskcoky") answer = "Skyblock";
       else if (target.includes("obsidian") || target === "aidnbosi") answer = "Obsidian";
       else answer = "Diamond Block";
-    }
-    // Trivia simulation
-    else {
+    } else {
       type = "TRIVIA";
       if (promptText.toLowerCase().includes("nether")) answer = "128";
       else if (promptText.toLowerCase().includes("rarest ore")) answer = "Emerald";
@@ -291,7 +741,6 @@ function setupSimulator() {
       else answer = "Steve";
     }
 
-    // Simulated Diamond Tier instant latency (800ms)
     setTimeout(() => {
       appendConsoleLine(`<span class="msg-solve">✔ [CatGame: Solve]</span> Type: <b>${type}</b> ➜ Auto-Answer: <span style="color:#38bdf8;">"${answer}"</span> <span class="msg-delay">(Speed: 0.8s)</span>`);
       consoleEl.scrollTop = consoleEl.scrollHeight;
@@ -306,7 +755,6 @@ function setupSimulator() {
   }
 }
 
-// 6. MODAL & CHECKOUT REDIRECT
 function setupModal() {
   const modal = document.getElementById("checkout-modal");
   const closeBtn = document.getElementById("modal-close");
@@ -356,18 +804,14 @@ function closeModal() {
   modal?.classList.remove("active");
 }
 
-// Global action handler
+// Global action handlers
 window.handleProductAction = function(productId) {
   const prod = PRODUCTS.find(p => p.id === productId);
   if (!prod) return;
 
   if (prod.id === "catgame-mod") {
-    // Scroll down smoothly to the Tier Matrix
-    const tiersSection = document.getElementById("catgame-tiers");
-    if (tiersSection) {
-      tiersSection.scrollIntoView({ behavior: "smooth" });
-      return;
-    }
+    router.navigate("/catgame");
+    return;
   }
 
   openModal(prod);
